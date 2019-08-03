@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour
     float speed;
 
     public Vector3 targetPosition;
+    public GameObject targetObj;
 
     public NavMeshAgent agent;
 
@@ -30,25 +31,33 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         MoveEnemy();
+        try
+        {
+            transform.LookAt(targetObj.transform);
+        }
+        catch
+        {
+            Debug.Log("Target Destroyed");
+        }
     }
 
     private void MoveEnemy()
     {
-       // Debug.Log("MOVEMENT SCRIPT TARGET?   " + targetPosition);
+        //Debug.Log("MOVEMENT SCRIPT TARGET?   " + targetPosition);
         //Debug.Log("PLAYER POSITION???    " + transform.position);
-        Debug.Log("MOVEMENT SCRIPT MOVING?  " + isMoving);
+        //Debug.Log("MOVEMENT SCRIPT MOVING?  " + isMoving);
 
-        if (transform.localPosition.x != targetPosition.x && transform.localPosition.z != targetPosition.z)
+        //if (transform.localPosition.x != targetPosition.x && transform.localPosition.z != targetPosition.z)
+        if(Vector3.Distance(transform.position, targetPosition) > .5f)
         {
             isMoving = true;
             agent.SetDestination(targetPosition);
-            //Debug.Log("MOVEMENT SCRIPT MOVING?  " + isMoving);
-            //Vector3 moveDir = new Vector3(MouseInput.clickPosition.x, 0, MouseInput.clickPosition.z) - transform.position;
-            //charController.Move(moveDir.normalized * speed * Time.deltaTime);
+            //Debug.Log("MOVEMENT SCRIPT MOVING?  " + isMoving);           
         }
         else //if(transform.position.x == targetPosition.x && transform.position.z == targetPosition.z)
         {
             isMoving = false;
+            GetComponent<EnemyPatrol>().moving = false;
         }
 
     }

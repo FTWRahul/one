@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myLayerMask:
     serializedVersion: 2
-    m_Bits: 11264
+    m_Bits: 27648
   castDistance: 20
   VisionSize: {x: 3, y: 5, z: 15}
 --- !u!114 &6710455771913974713
@@ -115,7 +115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  targetPosition: {x: 0, y: 0, z: 0}
   agent: {fileID: 0}
+  isMoving: 0
 --- !u!114 &7440702293153809310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiActions: []
+  moving: 0
 --- !u!54 &6710455771913974719
 Rigidbody:
   m_ObjectHideFlags: 0

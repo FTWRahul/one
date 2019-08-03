@@ -50,4 +50,9 @@ public class CloneMovement : MonoBehaviour
     {
         transform.parent = null;
     }
+
+    private void OnDestroy()
+    {
+        FindObjectOfType<ButtonZone>().ExitFunction();
+    }
 }

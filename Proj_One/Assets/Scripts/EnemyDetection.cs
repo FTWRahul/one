@@ -35,6 +35,8 @@ public class EnemyDetection : MonoBehaviour
                 Debug.Log("INSIDE");
                 GameObject go = hit.transform.gameObject;
                 movementScript.targetPosition = go.transform.position;
+                movementScript.targetObj = go;
+
             }
         }
         foreach (Collider col in sphereColliders)
@@ -47,6 +49,7 @@ public class EnemyDetection : MonoBehaviour
                 Debug.Log("INSIDE");
                 GameObject go = col.transform.gameObject;
                 movementScript.targetPosition = go.transform.position;
+                movementScript.targetObj = go;
             }
         }
 

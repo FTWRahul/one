@@ -9,7 +9,7 @@ public enum Rotation {Up, Down, Left, Right}
 public class EnemyPatrol : MonoBehaviour
 {
     public List<AIActions> aiActions;
-    bool moving;
+    public bool moving;
     bool rotating;
     bool standing;
     EnemyMovement movementScript;
@@ -31,15 +31,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         if(moving)
         {
-            //Debug.Log("PATROL SCRIPT TARGET :   " + targetPosi);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetPosi - transform.position), 5 * Time.deltaTime);
-            if(!movementScript.isMoving)
-            {                
-                moving = false;
-                //CheckNextState();
-                //return;
-            }
-            //return;
+           
         }
         else if(rotating)
         {
@@ -60,9 +52,7 @@ public class EnemyPatrol : MonoBehaviour
         {
             CheckNextState();
         }
-        //Debug.Log("STANDING? " + standing + "  ROTATING?   " + rotating + "  MOVING????   " + moving);
-        //CheckNextState();
-        //PatrolDictionary.a
+
     }
 
     private void CheckNextState()
@@ -72,33 +62,27 @@ public class EnemyPatrol : MonoBehaviour
         if(aiActions[i].patrolActions == PatrolActions.Move)
         {
             targetPosi = aiActions[i].patrolPositions.transform.position;
-            //targetRot = ReturnDirection(aiActions[i].rotationEnum);
-            //time = aiActions[i].time;
-           // Debug.Log("Moving");
             moving = true;
             movementScript.targetPosition = targetPosi;
-            //Debug.Log("PATROL POSI" + targetPosi);
-
         }
         else if(aiActions[i].patrolActions == PatrolActions.Rotate)
         {
             //targetPosi = aiActions[i].patrolPositions.transform.position;
             targetRot = ReturnDirection(aiActions[i].rotationEnum);
-            targetPosi = transform.position;
+            //targetPosi = transform.position;
             time = aiActions[i].time;
            // Debug.Log("Rotating");
             rotating = true;
-            //Debug.Log(targetRot);
-            //StartCoroutine(RotateToDir(ReturnDirection(aiActions[i].rotationEnum)));
         }
         else if(aiActions[i].patrolActions == PatrolActions.Stand)
         {
             //targetPosi = aiActions[i].patrolPositions.transform.position;
             //targetRot = ReturnDirection(aiActions[i].rotationEnum);
-            targetPosi = transform.position;
+            //targetPosi = transform.position;
             time = aiActions[i].time;
-           // Debug.Log("Standing");
+            // Debug.Log("Standing");
             //moving = false;
+            standing = true;
             StartCoroutine(StandForSeconds(time));
         }
         if(i < aiActions.Count)
@@ -115,12 +99,11 @@ public class EnemyPatrol : MonoBehaviour
 
     IEnumerator StandForSeconds(float time)
     {
-        standing = true;
 
         yield return new WaitForSeconds(time);
         standing = false;
 
-        CheckNextState();
+        //CheckNextState();
     }
 
     Quaternion ReturnDirection(Rotation rot)
