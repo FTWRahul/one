@@ -42,7 +42,8 @@ public class EnemyDetection : MonoBehaviour
             {
                 //Debug.Log(hit.collider.gameObject.name);
                 Debug.Log("INSIDE");
-                EnemyMovement.targetPosition = col.transform.position;
+                GameObject go = col.transform.gameObject;
+                EnemyMovement.targetPosition = go.transform.position;
             }
         }
 

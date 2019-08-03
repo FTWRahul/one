@@ -53,28 +53,38 @@ public class MouseInput : MonoBehaviour
                     SendClone(mousePosi);
                 }                
             }
-            else if(hit.collider.CompareTag("Clone"))
-            {
-                if (Input.GetMouseButtonDown(0) && cloneUsed && !switchUsed)
-                {
-                    ProcessClone(hit);
-                }
-            }
+            //else if(hit.collider.CompareTag("Clone"))
+            //{
+            //    if (Input.GetKeyDown(KeyCode.Space) && cloneUsed && !switchUsed)
+            //    {
+            //        ProcessClone(hit);
+            //    }
+            //}
+            
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && cloneUsed && !switchUsed)
+        {
+            ProcessClone(hit);
         }
     }
 
     private void ProcessClone(RaycastHit hit)
     {
-        hit.collider.GetComponent<CloneMovement>().enabled = false;
+        // hit.collider.GetComponent<CloneMovement>().enabled = false;
+        FindObjectOfType<CloneMovement>().enabled = false;
         GetComponent<PlayerMovement>().enabled = false;
         Vector3 previousPosi;
         Vector3 clonesPosition;
         clonesPosition = clonePrefab.transform.position;
         previousPosi = transform.position;
+        //transform.position = Vector3.Lerp(transform.position, clonesPosition, 10000 * Time.deltaTime);
         transform.position = clonesPosition;
+        //clonePrefab.transform.position = Vector3.Lerp(clonePrefab.transform.position, previousPosi, 10000 * Time.deltaTime);
         clonePrefab.transform.position = previousPosi;
         GetComponent<PlayerMovement>().enabled = true;
         switchUsed = true;
+        FindObjectOfType<ButtonZone>().ExitFunction();
+        FindObjectOfType<ButtonZone>().EnterFuncion();
 
         //Destroy(clonePrefab);
     }

@@ -37,6 +37,15 @@ public class CloneMovement : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Wall"))
+        {
+            Debug.Log("Wall touched");
+            this.enabled = false;
+        }
+    }
+
     private void OnEnable()
     {
         transform.parent = null;
