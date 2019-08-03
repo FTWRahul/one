@@ -12,12 +12,13 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     float speed;
 
-    public static Vector3 targetPosition;
+    public Vector3 targetPosition;
 
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
 
+     public bool isMoving;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         charController = GetComponent<CharacterController>();
@@ -33,12 +34,23 @@ public class EnemyMovement : MonoBehaviour
 
     private void MoveEnemy()
     {
-        if (transform.position != targetPosition)
+       // Debug.Log("MOVEMENT SCRIPT TARGET?   " + targetPosition);
+        //Debug.Log("PLAYER POSITION???    " + transform.position);
+        Debug.Log("MOVEMENT SCRIPT MOVING?  " + isMoving);
+
+        if (transform.localPosition.x != targetPosition.x && transform.localPosition.z != targetPosition.z)
         {
+            isMoving = true;
             agent.SetDestination(targetPosition);
+            //Debug.Log("MOVEMENT SCRIPT MOVING?  " + isMoving);
             //Vector3 moveDir = new Vector3(MouseInput.clickPosition.x, 0, MouseInput.clickPosition.z) - transform.position;
             //charController.Move(moveDir.normalized * speed * Time.deltaTime);
         }
+        else //if(transform.position.x == targetPosition.x && transform.position.z == targetPosition.z)
+        {
+            isMoving = false;
+        }
+
     }
 
 
@@ -51,6 +63,8 @@ public class EnemyMovement : MonoBehaviour
         else if (other.CompareTag("Clone"))
         {
             Debug.Log("Bamboozled");
+            Destroy(other.gameObject);
+            MouseInput.switchUsed = true;
         }
     }
 }

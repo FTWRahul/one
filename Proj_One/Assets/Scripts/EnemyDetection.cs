@@ -13,11 +13,11 @@ public class EnemyDetection : MonoBehaviour
     [SerializeField]
     Vector3 VisionSize;
 
-
+    EnemyMovement movementScript;
     // Start is called before the first frame update
     void Start()
     {
-        
+        movementScript = GetComponent<EnemyMovement>();
     }
 
     // Update is called once per frame
@@ -30,20 +30,23 @@ public class EnemyDetection : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Clone"))
             {
+                GetComponent<EnemyPatrol>().enabled = false;
                 Debug.Log(hit.collider.gameObject.name);
                 Debug.Log("INSIDE");
                 GameObject go = hit.transform.gameObject;
-                EnemyMovement.targetPosition = go.transform.position;
+                movementScript.targetPosition = go.transform.position;
             }
         }
         foreach (Collider col in sphereColliders)
         {
             if (col.CompareTag("Player") || col.CompareTag("Clone"))
             {
+                GetComponent<EnemyPatrol>().enabled = false;
+
                 //Debug.Log(hit.collider.gameObject.name);
                 Debug.Log("INSIDE");
                 GameObject go = col.transform.gameObject;
-                EnemyMovement.targetPosition = go.transform.position;
+                movementScript.targetPosition = go.transform.position;
             }
         }
 

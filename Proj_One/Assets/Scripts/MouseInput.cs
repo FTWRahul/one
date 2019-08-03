@@ -20,8 +20,8 @@ public class MouseInput : MonoBehaviour
 
     public static Vector3 clickPosition;
 
-    bool cloneUsed;
-    bool switchUsed;
+    public static bool cloneUsed;
+    public static bool switchUsed;
 
 
     // Start is called before the first frame update
