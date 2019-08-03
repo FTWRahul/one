@@ -17,6 +17,10 @@ public class MouseInput : MonoBehaviour
 
     public GameObject clonePrefab;
 
+    public static Vector3 clickPosition;
+
+    bool cloneUsed;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,17 +46,38 @@ public class MouseInput : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation),rotationSepeed * Time.deltaTime);
             if(hit.collider.CompareTag("Ground"))
             {
-                if(Input.GetMouseButtonDown(0))
+                if(Input.GetMouseButtonDown(0) && !cloneUsed)
                 {
                     SendClone(mousePosi);
+                }                
+            }
+            else if(hit.collider.CompareTag("Player") || hit.collider.CompareTag("Clone"))
+            {
+                if (Input.GetMouseButtonDown(0) && cloneUsed)
+                {
+                    ProcessClone(hit);
                 }
             }
+        }
+    }
+
+    private void ProcessClone(RaycastHit hit)
+    {
+        if (hit.collider.CompareTag("Player"))
+        {
+
+        }
+        else
+        {
+
         }
     }
 
     private void SendClone(Vector3 mousePosi)
     {
         clonePrefab.SetActive(true);
-
+        clickPosition = mousePosi;
+        cloneUsed = true;
+        //clonePrefab.GetComponent<CloneMovement>().
     }
 }

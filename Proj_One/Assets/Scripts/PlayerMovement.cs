@@ -32,8 +32,8 @@ public class PlayerMovement : MonoBehaviour
         float vert = Input.GetAxisRaw("Vertical");
 
         //Multiplaying the inputs with direction vectors and speed, normilizing with time.
-        Vector3 moveDirSide = transform.right * horiz;
-        Vector3 moveDirForward = transform.forward * vert;
+        Vector3 moveDirSide = Vector3.right * horiz;
+        Vector3 moveDirForward = Vector3.forward * vert;
 
 
         //Vector3 finalMoveDirection = (moveDirSide + moveDirForward).normalized * walkSpeed * Time.deltaTime;
