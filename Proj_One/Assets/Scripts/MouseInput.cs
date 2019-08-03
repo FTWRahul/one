@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MouseInput : MonoBehaviour
 {
     [SerializeField]
@@ -20,6 +21,7 @@ public class MouseInput : MonoBehaviour
     public static Vector3 clickPosition;
 
     bool cloneUsed;
+    bool switchUsed;
 
 
     // Start is called before the first frame update
@@ -51,9 +53,9 @@ public class MouseInput : MonoBehaviour
                     SendClone(mousePosi);
                 }                
             }
-            else if(hit.collider.CompareTag("Player") || hit.collider.CompareTag("Clone"))
+            else if(hit.collider.CompareTag("Clone"))
             {
-                if (Input.GetMouseButtonDown(0) && cloneUsed)
+                if (Input.GetMouseButtonDown(0) && cloneUsed && !switchUsed)
                 {
                     ProcessClone(hit);
                 }
@@ -63,14 +65,18 @@ public class MouseInput : MonoBehaviour
 
     private void ProcessClone(RaycastHit hit)
     {
-        if (hit.collider.CompareTag("Player"))
-        {
+        hit.collider.GetComponent<CloneMovement>().enabled = false;
+        GetComponent<PlayerMovement>().enabled = false;
+        Vector3 previousPosi;
+        Vector3 clonesPosition;
+        clonesPosition = clonePrefab.transform.position;
+        previousPosi = transform.position;
+        transform.position = clonesPosition;
+        clonePrefab.transform.position = previousPosi;
+        GetComponent<PlayerMovement>().enabled = true;
+        switchUsed = true;
 
-        }
-        else
-        {
-
-        }
+        //Destroy(clonePrefab);
     }
 
     private void SendClone(Vector3 mousePosi)
