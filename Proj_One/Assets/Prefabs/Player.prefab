@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 3389650972563948448}
   - component: {fileID: 3389650972563948474}
   - component: {fileID: 3389650972563948453}
+  - component: {fileID: 5178909833687620173}
   - component: {fileID: 3389650972563948455}
   - component: {fileID: 3389650972563948454}
   - component: {fileID: 3389650972563948449}
@@ -172,6 +173,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5178909833687620173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3389650972563948451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d609b4bcd71dbc74cb15143c1e76b18b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3389650972563948455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +437,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3328
   clonePrefab: {fileID: 3389650972563948451}
+  cloneUsed: 0
+  switchUsed: 0
 --- !u!54 &3389650973805385306
 Rigidbody:
   m_ObjectHideFlags: 0

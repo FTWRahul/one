@@ -20,8 +20,8 @@ public class MouseInput : MonoBehaviour
 
     public static Vector3 clickPosition;
 
-    public static bool cloneUsed;
-    public static bool switchUsed;
+    public bool cloneUsed;
+    public bool switchUsed;
 
 
     // Start is called before the first frame update
@@ -70,6 +70,11 @@ public class MouseInput : MonoBehaviour
 
     private void ProcessClone(RaycastHit hit)
     {
+        Vector3 previousPosi;
+        Vector3 clonesPosition;
+        clonesPosition = clonePrefab.transform.position;
+        previousPosi = transform.position;
+
         ButtonZone[] buttons = FindObjectsOfType<ButtonZone>();
         if (buttons != null)
         {
@@ -77,46 +82,42 @@ public class MouseInput : MonoBehaviour
             foreach (ButtonZone button in buttons)
             {
                 difference = Vector3.Distance(transform.position, button.transform.position);
-                if (difference < .5f)
+                if (difference < 1f)
                 {
-                    button.ExitFunction();
+                    button.itemsInZone--;
                 }
             }
-            //FindObjectOfType<ButtonZone>().ExitFunction();
-            //FindObjectOfType<ButtonZone>().EnterFuncion();
 
-            //Destroy(clonePrefab);
         }
+        clonePrefab.GetComponent<ButtonHandeling>().DisableHandling();
         // hit.collider.GetComponent<CloneMovement>().enabled = false;
         FindObjectOfType<CloneMovement>().enabled = false;
         GetComponent<PlayerMovement>().enabled = false;
-        Vector3 previousPosi;
-        Vector3 clonesPosition;
-        clonesPosition = clonePrefab.transform.position;
-        previousPosi = transform.position;
-        //transform.position = Vector3.Lerp(transform.position, clonesPosition, 10000 * Time.deltaTime);
+        //clonePrefab.SetActive(false);
         transform.position = clonesPosition;
         //clonePrefab.transform.position = Vector3.Lerp(clonePrefab.transform.position, previousPosi, 10000 * Time.deltaTime);
         clonePrefab.transform.position = previousPosi;
         GetComponent<PlayerMovement>().enabled = true;
+        //clonePrefab.SetActive(true);
+        //clonePrefab.GetComponent<ButtonHandeling>().EnableHandling();
         switchUsed = true;
-        ButtonZone[] buttons2 = FindObjectsOfType<ButtonZone>();
-        if (buttons != null)
-        {
-            float difference = 0;
-            foreach (ButtonZone button in buttons2)
-            {
-                difference = Vector3.Distance(transform.position, button.transform.position);
-                if (difference < .5f)
-                {
-                    button.EnterFuncion();
-                }
-            }
-            //FindObjectOfType<ButtonZone>().ExitFunction();
-            //FindObjectOfType<ButtonZone>().EnterFuncion();
+        //ButtonZone[] buttons2 = FindObjectsOfType<ButtonZone>();
+        //if (buttons != null)
+        //{
+        //    float difference = 0;
+        //    foreach (ButtonZone button in buttons2)
+        //    {
+        //        difference = Vector3.Distance(transform.position, button.transform.position);
+        //        if (difference < .5f)
+        //        {
+        //            button.itemsInZone--;
+        //        }
+        //    }
+        //    //FindObjectOfType<ButtonZone>().ExitFunction();
+        //    //FindObjectOfType<ButtonZone>().EnterFuncion();
 
-            //Destroy(clonePrefab);
-        }
+        //    //Destroy(clonePrefab);
+        //}
     }
 
     public void SendClone(Vector3 mousePosi)

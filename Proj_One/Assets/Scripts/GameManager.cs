@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         //StartCoroutine(LoadCurrentLevel());
-        SceneManager.LoadScene(levelRestart);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name.ToString());
         Time.timeScale = 1f;
         isPaused = false;
         Cursor.visible = true;

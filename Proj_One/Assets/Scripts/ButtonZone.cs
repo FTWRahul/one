@@ -21,7 +21,7 @@ public class ButtonZone : MonoBehaviour
     }
 
     //Number of objects on the button
-    int itemsInZone = 0;
+    public int itemsInZone = 0;
     MeshRenderer meshRenderer;
 
     public delegate void ForceCheck();
@@ -54,7 +54,7 @@ public class ButtonZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.gameObject.CompareTag("Clone") || other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy")))
+        if ((other.CompareTag("Clone") || other.CompareTag("Player") || other.CompareTag("Enemy")))
         {
             EnterFuncion();
         }
@@ -101,7 +101,7 @@ public class ButtonZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if ((other.gameObject.CompareTag("Clone") || other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy")))
+        if ((other.CompareTag("Clone") || other.CompareTag("Player") || other.CompareTag("Enemy")))
         {
             ExitFunction();
         }
@@ -113,13 +113,13 @@ public class ButtonZone : MonoBehaviour
         if (itemsInZone == 0)
         {
             isActive = true;
-            StartCoroutine(PlayAnimation(Color.green, openSound));
+            PlayAnimation(Color.green, openSound);
             //openSound.Play();
         }
         else
         {
             isActive = false;
-            StartCoroutine(PlayAnimation(Color.red, closeSound));
+            PlayAnimation(Color.red, closeSound);
             //closeSound.Play();
 
         }
@@ -139,13 +139,13 @@ public class ButtonZone : MonoBehaviour
         if (itemsInZone > 0)
         {
             isActive = true;
-            StartCoroutine(PlayAnimation(Color.green, openSound));
+            PlayAnimation(Color.green, openSound);
             //openSound.Play();
         }
         else
         {
             isActive = false;
-            StartCoroutine(PlayAnimation(Color.red, closeSound));
+            PlayAnimation(Color.red, closeSound);
             //closeSound.Play();
         }
     }
@@ -158,7 +158,7 @@ public class ButtonZone : MonoBehaviour
         if (itemsInZone < 1)
         {
             isActive = false;
-            StartCoroutine(PlayAnimation(Color.red, closeSound));
+            PlayAnimation(Color.red, closeSound);
             //closeSound.Play();
         }
     }
@@ -168,11 +168,11 @@ public class ButtonZone : MonoBehaviour
     /// </summary>
     /// <param name="inColour"></param>
     /// <returns></returns>
-    IEnumerator PlayAnimation(Color inColour, AudioSource SoundToPlay)
+    void PlayAnimation(Color inColour, AudioSource SoundToPlay)
     {
+        Debug.Log("THINGS IN THE ZONE    " + itemsInZone);
         SoundToPlay.Play();
         doorScript.CheckState();
         GetComponent<MeshRenderer>().material.color = inColour;
-        yield return new WaitForSeconds(.1f);
     }
 }

@@ -19,17 +19,26 @@ public class EnemyPatrol : MonoBehaviour
     Vector3 targetPosi;
     Quaternion targetRot;
     float time;
+    public bool isActive;
+
     // Start is called before the first frame update
     void Start()
     {
         movementScript = GetComponent<EnemyMovement>();
-        CheckNextState();
+        if(isActive)
+        {
+            CheckNextState();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(moving)
+        if (!isActive)
+        {
+            return;
+        }
+        if (moving)
         {
            if(!movementScript.isMoving)
             {

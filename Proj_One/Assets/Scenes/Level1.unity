@@ -495,7 +495,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh126736
+  m_Name: pb_Mesh69948
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2363,20 +2363,20 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 15, y: 20, z: -12}
+  m_LocalRotation: {x: 0.4617484, y: -0, z: -0, w: 0.88701105}
+  m_LocalPosition: {x: 15, y: 23, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 55.000004, y: 0, z: 0}
 --- !u!43 &1021203149
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh126766
+  m_Name: pb_Mesh69978
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2782,7 +2782,7 @@ GameObject:
   - component: {fileID: 1205300315}
   - component: {fileID: 1205300311}
   - component: {fileID: 1205300310}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ExitZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3471,7 +3471,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh126786
+  m_Name: pb_Mesh69998
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3900,6 +3900,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1975782277917915656, guid: 298f0eac94f8c254580975c6394f880a,
+        type: 3}
+      propertyPath: doorObj
+      value: 
+      objectReference: {fileID: 440995906}
     - target: {fileID: 1975782277917915663, guid: 298f0eac94f8c254580975c6394f880a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3965,11 +3970,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1850328358}
-    - target: {fileID: 1975782277917915656, guid: 298f0eac94f8c254580975c6394f880a,
-        type: 3}
-      propertyPath: doorObj
-      value: 
-      objectReference: {fileID: 440995906}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 298f0eac94f8c254580975c6394f880a, type: 3}
 --- !u!1001 &2265792074351783671
@@ -3993,6 +3993,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265792074457235125, guid: f33853942ef75b24e9e06468c62b7589,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2265792074440839130, guid: f33853942ef75b24e9e06468c62b7589,
         type: 3}
@@ -4050,11 +4055,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2265792075973881641, guid: f33853942ef75b24e9e06468c62b7589,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 2265792074457235125, guid: f33853942ef75b24e9e06468c62b7589,
         type: 3}
       propertyPath: m_Layer
       value: 14

@@ -37,7 +37,7 @@ public class EnemyMovement : MonoBehaviour
         }
         catch
         {
-            Debug.Log("Target Destroyed");
+            //Debug.Log("Target Destroyed");
         }
     }
 
@@ -68,12 +68,14 @@ public class EnemyMovement : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player killed");
+            GameManager.gm.LevelRestart();
         }
         else if (other.CompareTag("Clone"))
         {
             Debug.Log("Bamboozled");
             Destroy(other.gameObject);
-            MouseInput.switchUsed = true;
+            FindObjectOfType<MouseInput>().switchUsed = true;
+            //MouseInput.switchUsed = true;
         }
     }
 }
