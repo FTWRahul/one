@@ -23,11 +23,14 @@ public class MouseInput : MonoBehaviour
     public bool cloneUsed;
     public bool switchUsed;
 
+    AudioSource cloneSound;
+
 
     // Start is called before the first frame update
     void Start()
     {
         mainCam = FindObjectOfType<Camera>();
+        cloneSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -122,6 +125,7 @@ public class MouseInput : MonoBehaviour
 
     public void SendClone(Vector3 mousePosi)
     {
+        cloneSound.Play();
         clonePrefab.SetActive(true);
         clickPosition = mousePosi;
         cloneUsed = true;

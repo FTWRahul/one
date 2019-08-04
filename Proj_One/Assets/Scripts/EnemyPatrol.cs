@@ -48,9 +48,13 @@ public class EnemyPatrol : MonoBehaviour
         else if(rotating)
         {
             //Debug.Log(transform.rotation);
-            if(transform.rotation != targetRot)
+            if(Quaternion.Angle(transform.rotation, targetRot) != 0)
             {
+                //Debug.Log(Quaternion.Angle(transform.rotation, targetRot));
+                //Debug.Log("MY ROTATION   "+transform.rotation);
+                //Debug.Log("TARGET ROT   "+targetRot);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, time * Time.deltaTime);
+                //transform.rotation = Quaternion.Slerp(transform.rotation,new Quaternion(Mathf.Abs(targetRot.x), Mathf.Abs(targetRot.y), Mathf.Abs(targetRot.z), Mathf.Abs(targetRot.w)), time * Time.deltaTime);
                 //return;
             }
             else
@@ -64,13 +68,14 @@ public class EnemyPatrol : MonoBehaviour
         {
             CheckNextState();
         }
+        //Debug.Log("STAND   " + standing + "     MOVE??   " + moving + " ROTATE?   " + rotating);
 
     }
 
     private void CheckNextState()
     {
 
-        Debug.Log("CHECKING STATE");
+        //Debug.Log("CHECKING STATE");
         if(aiActions[i].patrolActions == PatrolActions.Move)
         {
             targetPosi = aiActions[i].patrolPositions.transform.position;
@@ -99,9 +104,9 @@ public class EnemyPatrol : MonoBehaviour
         }
         if(i < aiActions.Count)
         {
-            Debug.Log(aiActions.Count);
+            //Debug.Log(aiActions.Count);
             i++;
-            Debug.Log("I IS THIS PLEASE   "+i);
+            //Debug.Log("I IS THIS PLEASE   "+i);
             if(i == aiActions.Count)
             {
                 i = 0;
@@ -122,23 +127,30 @@ public class EnemyPatrol : MonoBehaviour
     {
         if(rot == Rotation.Up)
         {
-            return Quaternion.LookRotation(Vector3.forward);
+            return Quaternion.LookRotation(Vector3.forward, Vector3.up);
+            //return Quaternion.Euler(0, 0, 0);
         }
         else if (rot == Rotation.Down)
         {
-            return Quaternion.LookRotation(Vector3.back);
+            return Quaternion.LookRotation(Vector3.back, Vector3.up);
+            //return Quaternion.Euler(0, -180, 0);
+
         }
         else if (rot == Rotation.Left)
         {
-            return Quaternion.LookRotation(Vector3.left);
+            return Quaternion.LookRotation(Vector3.left, Vector3.up);
+           // return Quaternion.Euler(0, -90, 0);
+
         }
         else if (rot == Rotation.Right)
         {
-            return Quaternion.LookRotation(Vector3.right);
+            return Quaternion.LookRotation(Vector3.right, Vector3.up);
+           // return Quaternion.Euler(0, 90, 0);
+
         }
         else
         {
-            return Quaternion.identity;
+            return transform.rotation;
         }
     }
 }

@@ -15,9 +15,13 @@ public class EnemyDetection : MonoBehaviour
 
     EnemyMovement movementScript;
 
+    AudioSource detectionSound;
+    bool audioPlayed;
+
     // Start is called before the first frame update
     void Start()
     {
+        detectionSound = GetComponent<AudioSource>();
         movementScript = GetComponent<EnemyMovement>();
     }
 
@@ -26,7 +30,7 @@ public class EnemyDetection : MonoBehaviour
     {
 
         //Collider[] hitColliders = Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y, transform.position.z + VisionSize.z/2), VisionSize / 2, Quaternion.identity, myLayerMask);
-        Collider[] sphereColliders = Physics.OverlapSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z *3f), 4f, myLayerMask);
+        Collider[] sphereColliders = Physics.OverlapSphere(transform.position + transform.forward * 3f, 4f, myLayerMask);
         //if (Physics.BoxCast(transform.position, new Vector3(2f, 4f, 2f), Vector3.forward, out hit, Quaternion.identity, castDistance, myLayerMask))
         if(Physics.Raycast(transform.position, transform.forward, out hit,castDistance, myLayerMask))
         {
@@ -40,8 +44,9 @@ public class EnemyDetection : MonoBehaviour
                 {
 
                 }
-                Debug.Log(hit.collider.gameObject.name);
-                Debug.Log("INSIDE");
+                //Debug.Log(hit.collider.gameObject.name);
+                //Debug.Log("INSIDE");
+                DetectionSound();
                 GameObject go = hit.transform.gameObject;
                 movementScript.targetPosition = go.transform.position;
                 movementScript.targetObj = go;
@@ -62,7 +67,8 @@ public class EnemyDetection : MonoBehaviour
                 }
 
                 //Debug.Log(hit.collider.gameObject.name);
-                Debug.Log("INSIDE");
+                //Debug.Log("INSIDE");
+                DetectionSound();
                 GameObject go = col.transform.gameObject;
                 movementScript.targetPosition = go.transform.position;
                 movementScript.targetObj = go;
@@ -72,13 +78,21 @@ public class EnemyDetection : MonoBehaviour
 
     }
 
+    void DetectionSound()
+    {
+        if(!audioPlayed)
+        {
+            detectionSound.Play();
+            audioPlayed = true;
+        }
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         //Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y, transform.position.z + VisionSize.z/2), VisionSize);
         Gizmos.DrawLine(transform.position, hit.point);
         //Gizmos.DrawRay(transform.position, hit.point);
-        Gizmos.DrawWireSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z * 3f), 4f);
+        Gizmos.DrawWireSphere(transform.position + transform.forward * 3f, 4f);
 
         //Gizmos.DrawWireCube(hit.point)
     }
