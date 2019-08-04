@@ -57,7 +57,7 @@ public class EnemyMovement : MonoBehaviour
         else //if(transform.position.x == targetPosition.x && transform.position.z == targetPosition.z)
         {
             isMoving = false;
-            GetComponent<EnemyPatrol>().moving = false;
+            //GetComponent<EnemyPatrol>().moving = false;
         }
 
     }

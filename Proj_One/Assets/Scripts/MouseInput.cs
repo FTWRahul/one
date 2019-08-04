@@ -41,17 +41,17 @@ public class MouseInput : MonoBehaviour
     private void RotatePlayer(Ray ray)
     {
 
-        if(Physics.Raycast(ray, out hit, myLayerMask))
+        if (Physics.Raycast(ray, out hit, myLayerMask))
         {
             mousePosi = new Vector3(hit.point.x, 2f, hit.point.z);
             Vector3 rotation = mousePosi - transform.position;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation),rotationSepeed * Time.deltaTime);
-            if(hit.collider.CompareTag("Ground"))
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation), rotationSepeed * Time.deltaTime);
+            if (hit.collider.CompareTag("Ground"))
             {
-                if(Input.GetMouseButtonDown(0) && !cloneUsed)
+                if (Input.GetMouseButtonDown(0) && !cloneUsed)
                 {
                     SendClone(mousePosi);
-                }                
+                }
             }
             //else if(hit.collider.CompareTag("Clone"))
             //{
@@ -60,7 +60,7 @@ public class MouseInput : MonoBehaviour
             //        ProcessClone(hit);
             //    }
             //}
-            
+
         }
         if (Input.GetKeyDown(KeyCode.Space) && cloneUsed && !switchUsed)
         {
@@ -70,6 +70,23 @@ public class MouseInput : MonoBehaviour
 
     private void ProcessClone(RaycastHit hit)
     {
+        ButtonZone[] buttons = FindObjectsOfType<ButtonZone>();
+        if (buttons != null)
+        {
+            float difference = 0;
+            foreach (ButtonZone button in buttons)
+            {
+                difference = Vector3.Distance(transform.position, button.transform.position);
+                if (difference < .5f)
+                {
+                    button.ExitFunction();
+                }
+            }
+            //FindObjectOfType<ButtonZone>().ExitFunction();
+            //FindObjectOfType<ButtonZone>().EnterFuncion();
+
+            //Destroy(clonePrefab);
+        }
         // hit.collider.GetComponent<CloneMovement>().enabled = false;
         FindObjectOfType<CloneMovement>().enabled = false;
         GetComponent<PlayerMovement>().enabled = false;
@@ -83,13 +100,26 @@ public class MouseInput : MonoBehaviour
         clonePrefab.transform.position = previousPosi;
         GetComponent<PlayerMovement>().enabled = true;
         switchUsed = true;
-        FindObjectOfType<ButtonZone>().ExitFunction();
-        FindObjectOfType<ButtonZone>().EnterFuncion();
+        ButtonZone[] buttons2 = FindObjectsOfType<ButtonZone>();
+        if (buttons != null)
+        {
+            float difference = 0;
+            foreach (ButtonZone button in buttons2)
+            {
+                difference = Vector3.Distance(transform.position, button.transform.position);
+                if (difference < .5f)
+                {
+                    button.EnterFuncion();
+                }
+            }
+            //FindObjectOfType<ButtonZone>().ExitFunction();
+            //FindObjectOfType<ButtonZone>().EnterFuncion();
 
-        //Destroy(clonePrefab);
+            //Destroy(clonePrefab);
+        }
     }
 
-    private void SendClone(Vector3 mousePosi)
+    public void SendClone(Vector3 mousePosi)
     {
         clonePrefab.SetActive(true);
         clickPosition = mousePosi;

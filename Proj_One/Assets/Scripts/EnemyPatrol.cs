@@ -31,7 +31,10 @@ public class EnemyPatrol : MonoBehaviour
     {
         if(moving)
         {
-           
+           if(!movementScript.isMoving)
+            {
+                moving = false;
+            }
         }
         else if(rotating)
         {

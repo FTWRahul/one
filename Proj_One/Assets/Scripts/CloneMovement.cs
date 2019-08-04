@@ -49,10 +49,38 @@ public class CloneMovement : MonoBehaviour
     private void OnEnable()
     {
         transform.parent = null;
+        ButtonZone[] buttons = FindObjectsOfType<ButtonZone>();
+        if (buttons != null)
+        {
+            float difference = 0;
+            foreach (ButtonZone button in buttons)
+            {
+                difference = Vector3.Distance(transform.position, button.transform.position);
+                if (difference < .5f)
+                {
+                    button.EnterFuncion();
+                }
+            }
+            //FindObjectOfType<ButtonZone>().ExitFunction();
+        }
     }
 
     private void OnDestroy()
     {
-        FindObjectOfType<ButtonZone>().ExitFunction();
+        ButtonZone[] buttons = FindObjectsOfType<ButtonZone>();
+        if(buttons != null)
+        {
+            float difference = 0;
+            foreach (ButtonZone button in buttons)
+            {
+                difference = Vector3.Distance(transform.position, button.transform.position);
+                if (difference < .5f)
+                {
+                    button.ExitFunction();
+                }
+            }
+            //FindObjectOfType<ButtonZone>().ExitFunction();
+        }
     }
+    
 }

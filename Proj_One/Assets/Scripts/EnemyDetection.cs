@@ -30,7 +30,14 @@ public class EnemyDetection : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Clone"))
             {
-                GetComponent<EnemyPatrol>().enabled = false;
+                try
+                {
+                    GetComponent<EnemyPatrol>().enabled = false;
+                }
+                catch
+                {
+
+                }
                 Debug.Log(hit.collider.gameObject.name);
                 Debug.Log("INSIDE");
                 GameObject go = hit.transform.gameObject;
@@ -43,7 +50,14 @@ public class EnemyDetection : MonoBehaviour
         {
             if (col.CompareTag("Player") || col.CompareTag("Clone"))
             {
-                GetComponent<EnemyPatrol>().enabled = false;
+                try
+                {
+                    GetComponent<EnemyPatrol>().enabled = false;
+                }
+                catch
+                {
+                    
+                }
 
                 //Debug.Log(hit.collider.gameObject.name);
                 Debug.Log("INSIDE");
