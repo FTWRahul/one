@@ -170,7 +170,7 @@ public class ButtonZone : MonoBehaviour
     /// <returns></returns>
     void PlayAnimation(Color inColour, AudioSource SoundToPlay)
     {
-        Debug.Log("THINGS IN THE ZONE    " + itemsInZone);
+        //Debug.Log("THINGS IN THE ZONE    " + itemsInZone);
         SoundToPlay.Play();
         doorScript.CheckState();
         GetComponent<MeshRenderer>().material.color = inColour;
